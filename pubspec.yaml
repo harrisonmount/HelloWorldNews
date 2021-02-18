@@ -23,6 +23,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  dynamic_fonts:
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -48,7 +49,14 @@ flutter:
   # assets:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
-
+  assets:
+    - globe_logo.png
+    - globe_logo@2x.png
+    - globe_logo@3x.png
+  fonts:
+    - family: HelveticaNeue
+      fonts:
+        - asset: fonts/HelveticaNeue.ttc
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 

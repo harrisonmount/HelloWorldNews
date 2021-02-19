@@ -58,6 +58,13 @@ class _MyHomePageState extends State<MyHomePage> {
     );
 
     final passwordField = TextField(
+      controller: passwordEditingController,//controller
+      onChanged: (text2){
+        this.setState((){
+          _password = text2;//when state changed
+        });
+      },
+
       obscureText: true,
       style: style,
       decoration: InputDecoration(
@@ -75,9 +82,10 @@ class _MyHomePageState extends State<MyHomePage> {
         minWidth: MediaQuery.of(context).size.width,
         padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
         onPressed: () {
-          Navigator.push(
-            context, MaterialPageRoute(builder: (context) => LoginPage())
-          );
+          _sendDataToSecondScreen(context);
+          //Navigator.push(
+            //context, MaterialPageRoute(builder: (context) => LoginPage())
+          //);
         },
         child: Text("Login",
             textAlign: TextAlign.center,
@@ -127,5 +135,16 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
     );
+  }
+
+  void _sendDataToSecondScreen(BuildContext context) {
+    String textToSend = usernameEditingController.text;
+    String textToSend2 = passwordEditingController.text;
+
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => LoginPage(text: textToSend,text2: textToSend2),
+        ));
   }
 }

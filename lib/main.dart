@@ -1,4 +1,8 @@
+//import 'dart:html';
+
 import 'package:flutter/material.dart';
+import 'package:hello_world/src/login.dart';
+TextStyle style = TextStyle(fontFamily: 'Montserrat', fontSize: 20.0);
 
 void main() {
   runApp(MyApp());
@@ -29,10 +33,21 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   TextStyle style = TextStyle(fontFamily: 'HelveticaNeue', fontSize: 20.0);
 
+  String _username = '';
+  String _password = '';
+
+  final usernameEditingController = TextEditingController();
+  final passwordEditingController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
-
     final emailField = TextField(
+      controller: usernameEditingController,//controller
+      onChanged: (text){
+        this.setState((){
+          _username = text;//when state changed
+        });
+      },
       obscureText: false,
       style: style,
       decoration: InputDecoration(
@@ -59,7 +74,11 @@ class _MyHomePageState extends State<MyHomePage> {
       child: MaterialButton(
         minWidth: MediaQuery.of(context).size.width,
         padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+            context, MaterialPageRoute(builder: (context) => LoginPage())
+          );
+        },
         child: Text("Login",
             textAlign: TextAlign.center,
             style: style.copyWith(
@@ -110,5 +129,3 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
-
-TextStyle style = TextStyle(fontFamily: 'Montserrat', fontSize: 20.0);

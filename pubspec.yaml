@@ -53,6 +53,9 @@ flutter:
     - globe_logo.png
     - globe_logo@2x.png
     - globe_logo@3x.png
+    - facebook.png
+    - apple.png
+    - google.jpg
   fonts:
     - family: HelveticaNeue
       fonts:

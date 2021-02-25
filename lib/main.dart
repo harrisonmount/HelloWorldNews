@@ -2,6 +2,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:hello_world/src/login.dart';
+import 'package:hello_world/src/facebookLogin.dart';
+import 'package:hello_world/src/appleLogin.dart';
+import 'package:hello_world/src/googleLogin.dart';
+
 TextStyle style = TextStyle(fontFamily: 'Montserrat', fontSize: 20.0);
 
 void main() {
@@ -74,7 +78,7 @@ class _MyHomePageState extends State<MyHomePage> {
           OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
     );
 
-    final loginButon = Material(
+    final loginButton = Material(
       elevation: 5.0,
       borderRadius: BorderRadius.circular(30.0),
       color: Colors.blueGrey,
@@ -93,6 +97,109 @@ class _MyHomePageState extends State<MyHomePage> {
                 color: Colors.white, fontWeight: FontWeight.bold)),
       ),
     );
+
+    final faceBookButton = Material(
+      elevation: 5.0,
+      borderRadius: BorderRadius.circular(30.0),
+      color: Colors.blue,
+      child: MaterialButton(
+        minWidth: MediaQuery.of(context).size.width,
+        padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+        onPressed: () {
+          Navigator.push(
+          context, MaterialPageRoute(builder: (context) => facebookLoginPage())
+          );
+        },
+        child:Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(
+              height: 30,
+              child: Image.asset(
+                "assets/facebook.png",
+                fit: BoxFit.contain,
+              ),
+            ),
+            SizedBox(
+              width:15,
+            ),
+            Text("Continue with Facebook",
+                textAlign: TextAlign.center,
+                style: style.copyWith(
+                    color: Colors.white, fontWeight: FontWeight.bold)),
+          ],
+        ),
+      ),
+    );
+
+    final googleButton = Material(
+      elevation: 5.0,
+      borderRadius: BorderRadius.circular(30.0),
+      color: Colors.white,
+      child: MaterialButton(
+        minWidth: MediaQuery.of(context).size.width,
+        padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+        onPressed: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => googleLoginPage())
+          );
+        },
+        child:Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(
+              height: 30,
+              child: Image.asset(
+                "assets/google.jpg",
+                fit: BoxFit.contain,
+              ),
+            ),
+            SizedBox(
+              width:15,
+            ),
+            Text("Login with Google",
+                textAlign: TextAlign.center,
+                style: style.copyWith(
+                    color: Colors.black, fontWeight: FontWeight.bold)),
+          ],
+        ),
+      ),
+    );
+
+    final appleButton = Material(
+      elevation: 5.0,
+      borderRadius: BorderRadius.circular(30.0),
+      color: Colors.white,
+      child: MaterialButton(
+        minWidth: MediaQuery.of(context).size.width,
+        padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+        onPressed: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => appleLoginPage())
+          );
+        },
+        child:Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(
+              height: 30,
+              child: Image.asset(
+                "assets/apple.png",
+                fit: BoxFit.contain,
+              ),
+            ),
+            SizedBox(
+              width:15,
+            ),
+            Text("Continue with Apple ID",
+                textAlign: TextAlign.center,
+                style: style.copyWith(
+                    color: Colors.black, fontWeight: FontWeight.bold)),
+          ],
+        ),
+      ),
+    );
+
 
     return Scaffold(
       body: Center(
@@ -125,7 +232,13 @@ class _MyHomePageState extends State<MyHomePage> {
                 SizedBox(
                   height: 35.0,
                 ),
-                loginButon,
+                loginButton,
+                SizedBox(height: 10.0),
+                faceBookButton,
+                SizedBox(height: 10.0),
+                googleButton,
+                SizedBox(height: 10.0),
+                appleButton,
                 SizedBox(
                   height: 15.0,
                 ),
@@ -147,4 +260,5 @@ class _MyHomePageState extends State<MyHomePage> {
           builder: (context) => LoginPage(text: textToSend,text2: textToSend2),
         ));
   }
+
 }

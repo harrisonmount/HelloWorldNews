@@ -5,6 +5,7 @@ import 'package:hello_world/src/login.dart';
 import 'package:hello_world/src/facebookLogin.dart';
 import 'package:hello_world/src/appleLogin.dart';
 import 'package:hello_world/src/googleLogin.dart';
+import 'package:hello_world/src/WrapWidgetDemo.dart';
 
 TextStyle style = TextStyle(fontFamily: 'Montserrat', fontSize: 20.0);
 
@@ -175,7 +176,8 @@ class _MyHomePageState extends State<MyHomePage> {
         padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
         onPressed: () {
           Navigator.push(
-              context, MaterialPageRoute(builder: (context) => appleLoginPage())
+              context, MaterialPageRoute(builder: (context) => WrapWidgetDemo())
+              //CHANGE BACK TO appleLoginPage
           );
         },
         child:Row(

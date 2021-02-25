@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 
 class WrapWidgetDemo extends StatefulWidget {
   //
-  final String title = 'Wrap Widget & Chips';
+  WrapWidgetDemo({Key key, @required this.text, @required this.text2}) : super(key: key);
+  final String text;
+  final String text2;
+
+  final String title = 'Select Interests';
 
   @override
   State<StatefulWidget> createState() => _WrapWidgetDemoState();
@@ -10,12 +14,15 @@ class WrapWidgetDemo extends StatefulWidget {
 
 class _WrapWidgetDemoState extends State<WrapWidgetDemo> {
   //
+  TextStyle style = TextStyle(fontFamily: 'HelveticaNeue', fontSize: 20.0);
 
   GlobalKey<ScaffoldState> _key;
   List<String> _dynamicChips;
   bool _isSelected;
-  List<Company> _companies;
+  List<Interest> _interests;
+  List<Interest> _interests2;
   List<String> _filters;
+  List<String> _filters2;
   List<String> _choices;
   int _defaultChoiceIndex;
 
@@ -26,15 +33,24 @@ class _WrapWidgetDemoState extends State<WrapWidgetDemo> {
     _isSelected = false;
     _defaultChoiceIndex = 0;
     _filters = <String>[];
-    _companies = <Company>[
-      const Company('Google'),
-      const Company('Apple'),
-      const Company('Microsoft'),
-      const Company('Sony'),
-      const Company('Amazon'),
+    _interests = <Interest>[
+      const Interest('Republican'),
+      const Interest('Democrat'),
+      const Interest('Green Party'),
+      const Interest('Joe Biden'),
+      const Interest('Donald Trump'),
+      const Interest('Andrew Yang'),
+
     ];
-    _dynamicChips = ['Health', 'Food', 'Nature'];
-    _choices = ['Choice 1', 'Choice 2', 'Choice 3'];
+
+    _interests2 = <Interest>[
+      const Interest('Space'),
+      const Interest('Chemistry'),
+      const Interest('Robotics'),
+      const Interest('Computer Science'),
+      const Interest('AI'),
+      const Interest('Biology'),
+    ];
   }
 
   @override
@@ -46,8 +62,24 @@ class _WrapWidgetDemoState extends State<WrapWidgetDemo> {
       ),
       body: Column(
         children: <Widget>[
+          SizedBox(height: 45.0),
+          Text(
+            'Politics',
+            textAlign: TextAlign.left,
+            style: style.copyWith(
+                fontSize: 27.0,fontWeight: FontWeight.bold),
+          ),
           Wrap(
-            children: companyWidgets.toList(),
+            children: interestWidgets.toList(),
+          ),
+          Text(
+            'Interests2',
+            textAlign: TextAlign.left,
+            style: style.copyWith(
+                fontSize: 27.0,fontWeight: FontWeight.bold),
+          ),
+          Wrap(
+            children: interestWidgets.toList(),
           ),
           Text('Selected: ${_filters.join(', ')}'),
         ],
@@ -55,23 +87,23 @@ class _WrapWidgetDemoState extends State<WrapWidgetDemo> {
     );
   }
 
-  Iterable<Widget> get companyWidgets sync* {
-    for (Company company in _companies) {
+  Iterable<Widget> get interestWidgets sync* {
+    for (Interest interest in _interests) {
       yield Padding(
         padding: const EdgeInsets.all(6.0),
         child: FilterChip(
           avatar: CircleAvatar(
-            child: Text(company.name[0].toUpperCase()),
+            child: Text(interest.name[0].toUpperCase()),
           ),
-          label: Text(company.name),
-          selected: _filters.contains(company.name),
+          label: Text(interest.name),
+          selected: _filters.contains(interest.name),
           onSelected: (bool selected) {
             setState(() {
               if (selected) {
-                _filters.add(company.name);
+                _filters.add(interest.name);
               } else {
                 _filters.removeWhere((String name) {
-                  return name == company.name;
+                  return name == interest.name;
                 });
               }
             });
@@ -82,7 +114,7 @@ class _WrapWidgetDemoState extends State<WrapWidgetDemo> {
   }
 }
 
-class Company {
-  const Company(this.name);
+class Interest {
+  const Interest(this.name);
   final String name;
 }

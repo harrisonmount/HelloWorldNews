@@ -176,7 +176,7 @@ class _MyHomePageState extends State<MyHomePage> {
         padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
         onPressed: () {
           Navigator.push(
-              context, MaterialPageRoute(builder: (context) => WrapWidgetDemo())
+              context, MaterialPageRoute(builder: (context) => appleLoginPage())
               //CHANGE BACK TO appleLoginPage
           );
         },
@@ -259,7 +259,7 @@ class _MyHomePageState extends State<MyHomePage> {
     Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => LoginPage(text: textToSend,text2: textToSend2),
+          builder: (context) => WrapWidgetDemo(text: textToSend,text2: textToSend2),
         ));
   }
 

@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 
-class WrapWidgetDemo extends StatefulWidget {
+class OnBoarding extends StatefulWidget {
   //
-  WrapWidgetDemo({Key key, @required this.text, @required this.text2}) : super(key: key);
+  OnBoarding({Key key, @required this.text, @required this.text2}) : super(key: key);
   final String text;
   final String text2;
 
   final String title = 'Select Interests';
 
   @override
-  State<StatefulWidget> createState() => _WrapWidgetDemoState();
+  State<StatefulWidget> createState() => _OnBoardingState();
 }
 
-class _WrapWidgetDemoState extends State<WrapWidgetDemo> {
+class _OnBoardingState extends State<OnBoarding> {
   //
   TextStyle style = TextStyle(fontFamily: 'HelveticaNeue', fontSize: 20.0);
 

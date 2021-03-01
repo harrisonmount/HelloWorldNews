@@ -1,5 +1,3 @@
-//import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'package:hello_world/src/login.dart';
 import 'package:hello_world/src/facebookLogin.dart';
@@ -259,7 +257,7 @@ class _MyHomePageState extends State<MyHomePage> {
     Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => WrapWidgetDemo(text: textToSend,text2: textToSend2),
+          builder: (context) => OnBoarding(text: textToSend,text2: textToSend2),
         ));
   }
 

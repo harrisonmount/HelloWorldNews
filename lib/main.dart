@@ -3,7 +3,7 @@ import 'package:hello_world/src/login.dart';
 import 'package:hello_world/src/facebookLogin.dart';
 import 'package:hello_world/src/appleLogin.dart';
 import 'package:hello_world/src/googleLogin.dart';
-import 'package:hello_world/src/WrapWidgetDemo.dart';
+import 'package:hello_world/src/OnBoarding.dart';
 
 TextStyle style = TextStyle(fontFamily: 'Montserrat', fontSize: 20.0);
 

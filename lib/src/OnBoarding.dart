@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'dart:io';
+import 'package:csv/csv.dart' as csv;
 
 class OnBoarding extends StatefulWidget {
   //
@@ -15,7 +17,7 @@ class OnBoarding extends StatefulWidget {
 class _OnBoardingState extends State<OnBoarding> {
   //
   TextStyle style = TextStyle(fontFamily: 'HelveticaNeue', fontSize: 20.0);
-
+  //var x = readCSV('Interests.csv');
   GlobalKey<ScaffoldState> _key;
   List<String> _dynamicChips;
   bool _isSelected;
@@ -87,8 +89,11 @@ class _OnBoardingState extends State<OnBoarding> {
     );
   }
 
+
+
+
   Iterable<Widget> get interestWidgets sync* {
-    for (Interest interest in _interests) {
+    for (Interest interest in _interests) { //Loop of widgets in the list _insterests
       yield Padding(
         padding: const EdgeInsets.all(6.0),
         child: FilterChip(
@@ -118,3 +123,21 @@ class Interest {
   const Interest(this.name);
   final String name;
 }
+
+/*List<List> csvToList(File myCsvFile){
+  csv.CsvToListConverter c =
+      new csv.CsvToListCoverter(eol: "\r\n", fileDelmiter: ",");
+  List<List listCreated = c.convert(myCsvFile.readAsStringSync());
+  return listCreated;
+}*/
+//READING INTERESTS FROM CSV
+/*
+int readCSV(String s){
+  final lines = File(s).readAsLinesSync();
+
+  for (var line in lines){
+    print(line);
+  }
+
+  return 1;
+}*/

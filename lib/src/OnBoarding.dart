@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:io';
-import 'package:csv/csv.dart' as csv;
+import 'package:csv/csv.dart';
 
 class OnBoarding extends StatefulWidget {
   //
@@ -15,44 +15,86 @@ class OnBoarding extends StatefulWidget {
 }
 
 class _OnBoardingState extends State<OnBoarding> {
-  //
   TextStyle style = TextStyle(fontFamily: 'HelveticaNeue', fontSize: 20.0);
-  //var x = readCSV('Interests.csv');
+
   GlobalKey<ScaffoldState> _key;
   List<String> _dynamicChips;
-  bool _isSelected;
-  List<Interest> _interests;
-  List<Interest> _interests2;
+  List<String> _interests;
+  List<String> _interests2;
   List<String> _filters;
-  List<String> _filters2;
-  List<String> _choices;
-  int _defaultChoiceIndex;
+
 
   @override
   void initState() {
     super.initState();
     _key = GlobalKey<ScaffoldState>();
-    _isSelected = false;
-    _defaultChoiceIndex = 0;
+
+    _interests = ['optionA', 'optionB', 'optionC', 'optionD', 'optionE', 'optionF'];
+    _interests2 = ['optionAa', 'optionB', 'optionC', 'optionD', 'optionE', 'optionF'];
+    //List<List<dynamic>> csv = csvToList('Interests.csv');
+
     _filters = <String>[];
-    _interests = <Interest>[
-      const Interest('Republican'),
-      const Interest('Democrat'),
-      const Interest('Green Party'),
-      const Interest('Joe Biden'),
-      const Interest('Donald Trump'),
-      const Interest('Andrew Yang'),
 
-    ];
+  }
 
-    _interests2 = <Interest>[
-      const Interest('Space'),
-      const Interest('Chemistry'),
-      const Interest('Robotics'),
-      const Interest('Computer Science'),
-      const Interest('AI'),
-      const Interest('Biology'),
-    ];
+
+  Widget interestsSectionDisplay() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: <Widget>[
+        SizedBox(height: 25.0),
+        singleSectionColumn(_interests),
+        SizedBox(height: 25.0),
+        Text('Selected: ${_filters.join(', ')}'),
+      ],
+    );
+  }
+
+
+  singleSectionColumn(List interestname) {
+    return Column(
+      //crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          Text(
+            interestname[0],
+            textAlign: TextAlign.left,
+            style: style.copyWith(
+                fontSize: 27.0,fontWeight: FontWeight.bold),
+          ),
+          Container(
+            child: Wrap(
+              spacing: 10.0,
+              runSpacing: 2.0,
+              children: List<Widget>.generate(interestname.length, (int index) {
+                return FilterChip(
+                    label: Text(interestname[index]),
+                    selectedColor: Colors.blue,
+                    showCheckmark: false,
+                    selected: _filters.contains(interestname[index]),
+                    onSelected: (bool selected) {
+                      setState(() {
+                        if (selected) {
+                          _filters.add(interestname[index]);
+                        } else {
+                          _filters.removeWhere((String name) {
+                            return name == interestname[index];
+                          });
+                        }
+                      });
+                    }
+                );
+              }),
+            )
+          ),
+        ],
+    );
+  }
+
+  List<List> csvToList(File myCsvFile){
+    CsvToListConverter c =
+        new CsvToListConverter(eol: "\r\n", fieldDelimiter: ",");
+    List<List> listCreated = c.convert(myCsvFile.readAsStringSync());
+    return listCreated;
   }
 
   @override
@@ -62,67 +104,14 @@ class _OnBoardingState extends State<OnBoarding> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Column(
-        children: <Widget>[
-          SizedBox(height: 45.0),
-          Text(
-            'Politics',
-            textAlign: TextAlign.left,
-            style: style.copyWith(
-                fontSize: 27.0,fontWeight: FontWeight.bold),
-          ),
-          Wrap(
-            children: interestWidgets.toList(),
-          ),
-          Text(
-            'Interests2',
-            textAlign: TextAlign.left,
-            style: style.copyWith(
-                fontSize: 27.0,fontWeight: FontWeight.bold),
-          ),
-          Wrap(
-            children: interestWidgets.toList(),
-          ),
-          Text('Selected: ${_filters.join(', ')}'),
-        ],
-      ),
+      body: Container(//used container to align the interestsSectionDisplay
+        alignment: Alignment.center,
+        child: interestsSectionDisplay(),
+      )
     );
   }
-
-
-
-
-  Iterable<Widget> get interestWidgets sync* {
-    for (Interest interest in _interests) { //Loop of widgets in the list _insterests
-      yield Padding(
-        padding: const EdgeInsets.all(6.0),
-        child: FilterChip(
-          avatar: CircleAvatar(
-            child: Text(interest.name[0].toUpperCase()),
-          ),
-          label: Text(interest.name),
-          selected: _filters.contains(interest.name),
-          onSelected: (bool selected) {
-            setState(() {
-              if (selected) {
-                _filters.add(interest.name);
-              } else {
-                _filters.removeWhere((String name) {
-                  return name == interest.name;
-                });
-              }
-            });
-          },
-        ),
-      );
-    }
-  }
 }
 
-class Interest {
-  const Interest(this.name);
-  final String name;
-}
 
 /*List<List> csvToList(File myCsvFile){
   csv.CsvToListConverter c =
@@ -141,3 +130,8 @@ int readCSV(String s){
 
   return 1;
 }*/
+
+//For First Initials Displayed in circle before text
+/*avatar: CircleAvatar(
+            child: Text(interest.name[0].toUpperCase()),
+          ),*/

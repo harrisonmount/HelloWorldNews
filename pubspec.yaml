@@ -57,6 +57,7 @@ flutter:
     - facebook.png
     - apple.png
     - google.jpg
+    - Interests.csv
   fonts:
     - family: HelveticaNeue
       fonts:

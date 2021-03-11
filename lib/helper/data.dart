@@ -28,10 +28,10 @@ List<CategoryModel> getCategories(){
 
   categoryModel = new CategoryModel();
 
-  //1
+  //4
   categoryModel.categoryName = "Sports";
   categoryModel.imageUrl = "https://images.unsplash.com/photo-1517649763962-0c623066013b?ixid=MXwxMjA3fDB8MHxzZWFyY2h8M3x8c3BvcnRzfGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1400&q=60";
   category.add(categoryModel);
 
-  categoryModel = new CategoryModel();
+  return category;
 }

@@ -205,44 +205,46 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Center(
         child: Container(
           color: Colors.white,
-          child: Padding(
-            padding: const EdgeInsets.all(36.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                SizedBox(
-                  height: 155.0,
-                  child: Image.asset(
-                    "assets/globe_logo@3x.png",
-                    fit: BoxFit.contain,
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(36.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  SizedBox(
+                    height: 155.0,
+                    child: Image.asset(
+                      "assets/globe_logo@3x.png",
+                      fit: BoxFit.contain,
+                    ),
                   ),
-                ),
-                SizedBox(height: 25.0),
-                Text(
-                  'Welcome to Hello World!',
-                  textAlign: TextAlign.center,
-                  style: style.copyWith(
-                      fontSize: 27.0,fontWeight: FontWeight.bold),
-                ),
-                SizedBox(height: 45.0),
-                emailField,
-                SizedBox(height: 25.0),
-                passwordField,
-                SizedBox(
-                  height: 35.0,
-                ),
-                loginButton,
-                SizedBox(height: 10.0),
-                faceBookButton,
-                SizedBox(height: 10.0),
-                googleButton,
-                SizedBox(height: 10.0),
-                appleButton,
-                SizedBox(
-                  height: 15.0,
-                ),
-              ],
+                  SizedBox(height: 25.0),
+                  Text(
+                    'Welcome to Hello World!',
+                    textAlign: TextAlign.center,
+                    style: style.copyWith(
+                        fontSize: 27.0,fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(height: 45.0),
+                  emailField,
+                  SizedBox(height: 25.0),
+                  passwordField,
+                  SizedBox(
+                    height: 35.0,
+                  ),
+                  loginButton,
+                  SizedBox(height: 10.0),
+                  faceBookButton,
+                  SizedBox(height: 10.0),
+                  googleButton,
+                  SizedBox(height: 10.0),
+                  appleButton,
+                  SizedBox(
+                    height: 15.0,
+                  ),
+                ],
+              ),
             ),
           ),
         ),

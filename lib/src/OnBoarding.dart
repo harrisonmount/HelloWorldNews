@@ -21,76 +21,90 @@ class _OnBoardingState extends State<OnBoarding> {
   List<String> _dynamicChips;
   List<String> _interests;
   List<String> _interests2;
-  List<String> _filters;
 
+  List<String> _filters;
 
   @override
   void initState() {
     super.initState();
     _key = GlobalKey<ScaffoldState>();
 
-    _interests = ['optionA', 'optionB', 'optionC', 'optionD', 'optionE', 'optionF'];
-    _interests2 = ['optionAa', 'optionB', 'optionC', 'optionD', 'optionE', 'optionF'];
+    _interests = ['Politics','Andrew Yang','Donald Trump','Republican','Democrat','Green Party','Washington DC'];
+    _interests2 = ['Science', 'Ai/Machine Learning', 'Space', 'Blockchain', 'Computer Science', 'Chemistry'];
     //List<List<dynamic>> csv = csvToList('Interests.csv');
-
     _filters = <String>[];
 
   }
 
 
-  Widget interestsSectionDisplay() {
+  Widget interestsSectionDisplayold() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
         SizedBox(height: 25.0),
         singleSectionColumn(_interests),
         SizedBox(height: 25.0),
+        singleSectionColumn(_interests2),
         Text('Selected: ${_filters.join(', ')}'),
       ],
     );
   }
 
+  ListView interestsSectionDisplay() {
+    List interestfile = csvToList('Users/harrisonmount/Desktop/HelloWorld/hello_world/assets/Interests.csv');
+
+    print(interestfile[0]);
+    return ListView(
+      children: <Widget>[
+        for(int x = 0; x < interestfile.length; x++)
+        singleSectionColumn(interestfile[x]),
+        Text('Selected: ${_filters.join(', ')}'),
+      ],
+    );
+  }
 
   singleSectionColumn(List interestname) {
     return Column(
       //crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          Text(
-            interestname[0],
-            textAlign: TextAlign.left,
-            style: style.copyWith(
-                fontSize: 27.0,fontWeight: FontWeight.bold),
-          ),
-          Container(
+      children: <Widget>[
+        SizedBox(height: 25.0),
+        Text(
+          interestname[0],
+          textAlign: TextAlign.left,
+          style: style.copyWith(
+              fontSize: 27.0,fontWeight: FontWeight.bold),
+        ),
+        Container(
             child: Wrap(
-              spacing: 10.0,
+              spacing: 6.0,
               runSpacing: 2.0,
-              children: List<Widget>.generate(interestname.length, (int index) {
-                return FilterChip(
-                    label: Text(interestname[index]),
+              children: [for (int x  = 1;  x < interestname.length; x++)
+                FilterChip(
+                    label: Text(interestname[x]),
                     selectedColor: Colors.blue,
                     showCheckmark: false,
-                    selected: _filters.contains(interestname[index]),
+                    selected: _filters.contains(interestname[x]),
                     onSelected: (bool selected) {
                       setState(() {
                         if (selected) {
-                          _filters.add(interestname[index]);
+                          _filters.add(interestname[x]);
                         } else {
                           _filters.removeWhere((String name) {
-                            return name == interestname[index];
+                            return name == interestname[x];
                           });
                         }
                       });
                     }
-                );
-              }),
+                )
+              ]),
             )
-          ),
         ],
-    );
+      );
   }
 
-  List<List> csvToList(File myCsvFile){
+  List<List> csvToList(String name){
+    var myCsvFile = File(name);
+
     CsvToListConverter c =
         new CsvToListConverter(eol: "\r\n", fieldDelimiter: ",");
     List<List> listCreated = c.convert(myCsvFile.readAsStringSync());
@@ -99,6 +113,8 @@ class _OnBoardingState extends State<OnBoarding> {
 
   @override
   Widget build(BuildContext context) {
+    //List interestfile = csvToList('Users/harrisonmount/Desktop/HelloWorld/hello_world/assets/Interests.csv');
+
     return Scaffold(
       key: _key,
       appBar: AppBar(
@@ -111,25 +127,6 @@ class _OnBoardingState extends State<OnBoarding> {
     );
   }
 }
-
-
-/*List<List> csvToList(File myCsvFile){
-  csv.CsvToListConverter c =
-      new csv.CsvToListCoverter(eol: "\r\n", fileDelmiter: ",");
-  List<List listCreated = c.convert(myCsvFile.readAsStringSync());
-  return listCreated;
-}*/
-//READING INTERESTS FROM CSV
-/*
-int readCSV(String s){
-  final lines = File(s).readAsLinesSync();
-
-  for (var line in lines){
-    print(line);
-  }
-
-  return 1;
-}*/
 
 //For First Initials Displayed in circle before text
 /*avatar: CircleAvatar(

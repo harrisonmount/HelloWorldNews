@@ -4,6 +4,7 @@ import 'package:hello_world/src/facebookLogin.dart';
 import 'package:hello_world/src/appleLogin.dart';
 import 'package:hello_world/src/googleLogin.dart';
 import 'package:hello_world/src/OnBoarding.dart';
+import 'package:hello_world/src/home.dart';
 
 TextStyle style = TextStyle(fontFamily: 'Montserrat', fontSize: 20.0);
 
@@ -259,7 +260,8 @@ class _MyHomePageState extends State<MyHomePage> {
     Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => OnBoarding(text: textToSend,text2: textToSend2),
+          builder: (context) => Home(),
+          //builder: (context) => OnBoarding(text: textToSend,text2: textToSend2),
         ));
   }
 

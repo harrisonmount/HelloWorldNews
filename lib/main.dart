@@ -18,8 +18,14 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blueGrey,
+        primaryColor: Colors.white,
+        //primarySwatch: Colors.white,
         visualDensity: VisualDensity.adaptivePlatformDensity,
+        appBarTheme: AppBarTheme(
+          iconTheme: IconThemeData(
+            color: Colors.black,
+          )
+        ),
       ),
       home: MyHomePage(/*title: 'Flutter Demo Home Page'*/),
     );
@@ -107,7 +113,7 @@ class _MyHomePageState extends State<MyHomePage> {
         padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
         onPressed: () {
           Navigator.push(
-          context, MaterialPageRoute(builder: (context) => facebookLoginPage())
+          context, MaterialPageRoute(builder: (context) => OnBoarding(text: "text", text2: "test"))
           );
         },
         child:Row(

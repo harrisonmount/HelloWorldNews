@@ -4,6 +4,7 @@ import 'package:hello_world/helper/data.dart';
 import 'package:hello_world/helper/news.dart';
 import 'package:hello_world/models/article_model.dart';
 import 'package:hello_world/models/category_model.dart';
+import 'package:hello_world/src/category_news.dart';
 
 import 'article_view.dart';
 
@@ -40,15 +41,24 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text("Flutter"),
+            Text("Hello"),
             Text("News", style: TextStyle(
-              color: Colors.blue
+              color: Colors.blueGrey
             ),)
           ],
         ),
+        actions: <Widget>[
+          Opacity(
+            opacity: 0,
+            child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 16),
+                child: Icon(Icons.save)),
+          )
+        ],
         centerTitle: true,
         elevation: 0.5,
       ),
@@ -113,7 +123,11 @@ class CategoryTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: (){
-
+        Navigator.push(context, MaterialPageRoute(
+            builder: (context) => CategoryNews(
+              category: categoryName.toLowerCase(),
+            )
+        ));
       },
       child: Container(
           margin: EdgeInsets.only(right: 16),

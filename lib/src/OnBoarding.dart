@@ -29,31 +29,12 @@ class _OnBoardingState extends State<OnBoarding> {
     super.initState();
     _key = GlobalKey<ScaffoldState>();
 
-    _interests = ['Politics','Andrew Yang','Donald Trump','Republican','Democrat','Green Party','Washington DC'];
-    _interests2 = ['Science', 'Ai/Machine Learning', 'Space', 'Blockchain', 'Computer Science', 'Chemistry'];
-    //List<List<dynamic>> csv = csvToList('Interests.csv');
     _filters = <String>[];
 
   }
 
-
-  Widget interestsSectionDisplayold() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: <Widget>[
-        SizedBox(height: 25.0),
-        singleSectionColumn(_interests),
-        SizedBox(height: 25.0),
-        singleSectionColumn(_interests2),
-        Text('Selected: ${_filters.join(', ')}'),
-      ],
-    );
-  }
-
   ListView interestsSectionDisplay() {
     List interestfile = csvToList('Users/harrisonmount/Desktop/HelloWorld/hello_world/assets/Interests.csv');
-
-    print(interestfile[0]);
     return ListView(
       children: <Widget>[
         for(int x = 0; x < interestfile.length; x++)
@@ -81,7 +62,7 @@ class _OnBoardingState extends State<OnBoarding> {
               children: [for (int x  = 1;  x < interestname.length; x++)
                 FilterChip(
                     label: Text(interestname[x]),
-                    selectedColor: Colors.blue,
+                    selectedColor: Colors.blueGrey,
                     showCheckmark: false,
                     selected: _filters.contains(interestname[x]),
                     onSelected: (bool selected) {
@@ -113,8 +94,6 @@ class _OnBoardingState extends State<OnBoarding> {
 
   @override
   Widget build(BuildContext context) {
-    //List interestfile = csvToList('Users/harrisonmount/Desktop/HelloWorld/hello_world/assets/Interests.csv');
-
     return Scaffold(
       key: _key,
       appBar: AppBar(
@@ -127,8 +106,3 @@ class _OnBoardingState extends State<OnBoarding> {
     );
   }
 }
-
-//For First Initials Displayed in circle before text
-/*avatar: CircleAvatar(
-            child: Text(interest.name[0].toUpperCase()),
-          ),*/

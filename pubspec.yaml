@@ -25,7 +25,7 @@ dependencies:
   flutter:
     sdk: flutter
   dynamic_fonts:
-  http: ^0.12.0
+  http: ^0.12.0+4
   cached_network_image: ^2.5.1
   webview_flutter:
 

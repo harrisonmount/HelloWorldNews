@@ -23,9 +23,9 @@ class _ArticleViewState extends State<ArticleView> {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text("Flutter"),
+            Text("Hello"),
             Text("News", style: TextStyle(
-                color: Colors.blue
+                color: Colors.blueGrey
             ),)
           ],
         ),
@@ -38,7 +38,7 @@ class _ArticleViewState extends State<ArticleView> {
           )
         ],
         centerTitle: true,
-        elevation: 0.5,
+        elevation: 0.0,
       ),
       body: Container(
         height: MediaQuery.of(context).size.height,

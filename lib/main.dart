@@ -1,34 +1,80 @@
 import 'package:flutter/material.dart';
+import 'package:hello_world/helper/auth_service.dart';
 import 'package:hello_world/src/login.dart';
 import 'package:hello_world/src/facebookLogin.dart';
 import 'package:hello_world/src/appleLogin.dart';
 import 'package:hello_world/src/googleLogin.dart';
 import 'package:hello_world/src/OnBoarding.dart';
 import 'package:hello_world/src/home.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:provider/provider.dart';
 
 TextStyle style = TextStyle(fontFamily: 'Montserrat', fontSize: 20.0);
 
-void main() {
+
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(MyApp());
 }
 //test
 class MyApp extends StatelessWidget {
+  final Future<FirebaseApp> _fbApp = Firebase.initializeApp();
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primaryColor: Colors.white,
-        //primarySwatch: Colors.white,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-        appBarTheme: AppBarTheme(
-          iconTheme: IconThemeData(
-            color: Colors.black,
-          )
+    return MultiProvider(
+      providers: [
+        Provider<AuthenticationService>(
+          create: (_) => AuthenticationService(FirebaseAuth.instance),
         ),
+        StreamProvider(
+          create: (context) => context.read()<AuthenticationService>().authStateChanges,
+        )
+      ],
+      child: MaterialApp(
+          title: 'Flutter Demo',
+          theme: ThemeData(
+            primaryColor: Colors.white,
+            //primarySwatch: Colors.white,
+            visualDensity: VisualDensity.adaptivePlatformDensity,
+            appBarTheme: AppBarTheme(
+                iconTheme: IconThemeData(
+                  color: Colors.black,
+                )
+            ),
+          ),
+          home: FutureBuilder(
+              future: _fbApp,
+              builder: (context, snapshot){
+                if(snapshot.hasError){
+                  print("you have an error! ${snapshot.error.toString()}");
+                  return Text("Something went wrong");
+                } else if (snapshot.hasData){
+                  return AuthenticationWrapper();
+                }else{
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+
+              }
+          )
       ),
-      home: MyHomePage(/*title: 'Flutter Demo Home Page'*/),
     );
+  }
+}
+
+
+class AuthenticationWrapper extends StatelessWidget{
+  @override
+  Widget build(BuildContext context){
+    final firebaseUser = context.watch<User>();
+
+    if(firebaseUser != null){
+      return Home();
+    }
+    return MyHomePage();
   }
 }
 
@@ -42,7 +88,6 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   TextStyle style = TextStyle(fontFamily: 'HelveticaNeue', fontSize: 20.0);
-
   String _username = '';
   String _password = '';
 
@@ -92,9 +137,13 @@ class _MyHomePageState extends State<MyHomePage> {
         minWidth: MediaQuery.of(context).size.width,
         padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
         onPressed: () {
-          _sendDataToSecondScreen(context);
+          context.read<AuthenticationService>().signIn(
+            email: _username.trim(),
+            password: _password.trim(),
+          );
+
           //Navigator.push(
-            //context, MaterialPageRoute(builder: (context) => LoginPage())
+          //context, MaterialPageRoute(builder: (context) => LoginPage())
           //);
         },
         child: Text("Login",
@@ -113,7 +162,7 @@ class _MyHomePageState extends State<MyHomePage> {
         padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
         onPressed: () {
           Navigator.push(
-          context, MaterialPageRoute(builder: (context) => OnBoarding(text: "text", text2: "test"))
+              context, MaterialPageRoute(builder: (context) => OnBoarding(text: "text", text2: "test"))
           );
         },
         child:Row(
@@ -182,7 +231,7 @@ class _MyHomePageState extends State<MyHomePage> {
         onPressed: () {
           Navigator.push(
               context, MaterialPageRoute(builder: (context) => appleLoginPage())
-              //CHANGE BACK TO appleLoginPage
+            //CHANGE BACK TO appleLoginPage
           );
         },
         child:Row(

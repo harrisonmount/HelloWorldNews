@@ -49,12 +49,6 @@ class _newHomeState extends State<newHome> {
           title: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              ElevatedButton(
-                onPressed: () {
-                  context.read<AuthenticationService>().signOut();
-                },
-                child: Text("sign out"),
-              ),
               Text("Hello"),
               Text("News", style: TextStyle(
                   color: Colors.blueGrey

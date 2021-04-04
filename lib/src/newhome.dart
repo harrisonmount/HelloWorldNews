@@ -20,6 +20,8 @@ class _newHomeState extends State<newHome> {
   List<CategoryModel> categories = new List<CategoryModel>();
   List<ArticleModel> articles = new List<ArticleModel>();
 
+  List<int> list = [1,2,3,4,5];
+
   bool _loading = true;
   @override
   void initState() {
@@ -92,6 +94,22 @@ class _newHomeState extends State<newHome> {
                         },
                       )
                   ),
+
+                  /*CarouselSlider(
+                    options: CarouselOptions(
+                      enableInfiniteScroll: false,
+                      scrollDirection: Axis.vertical,
+                      //height:700,
+                    ),
+                    items: list.map((item) => SizedBox(
+                      child: Center(
+                          child: Text(item.toString())
+                      ),
+                      //color: Colors.green,
+                    )).toList(),
+                  ),*/
+
+
                   CarouselSlider(
                     options: CarouselOptions(
                       enableInfiniteScroll: false,
@@ -113,24 +131,24 @@ class _newHomeState extends State<newHome> {
                                 Image.network(
                                   item.urlToImage,
                                   fit: BoxFit.fitHeight,
-                                  height: 500,
+                                  height: 600,
                                 ),
                                 Container(
-                                    height: 500,
+                                    height: 600,
                                     decoration: BoxDecoration(
-                                        color: Colors.white,
+                                        //color: Colors.white,
                                         gradient: LinearGradient(
                                           begin: Alignment.topCenter,
                                           end: Alignment.bottomCenter,
-                                          colors: [Colors.transparent, Colors.grey],
+                                          colors: [Colors.transparent, Color(0x00000000)],
                                         )
                                     )
                                 ),
-                                Container(
+                                /*Container(
                                   child: Align(
                                     child: Text(item.title)
                                   )
-                                )
+                                )*/
                               ]
                           )
                         ),

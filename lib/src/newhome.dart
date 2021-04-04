@@ -95,28 +95,18 @@ class _newHomeState extends State<newHome> {
                       )
                   ),
 
-                  /*CarouselSlider(
-                    options: CarouselOptions(
-                      enableInfiniteScroll: false,
-                      scrollDirection: Axis.vertical,
-                      //height:700,
-                    ),
-                    items: list.map((item) => SizedBox(
-                      child: Center(
-                          child: Text(item.toString())
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(16),
+                    child:
+                    CarouselSlider(
+                      options: CarouselOptions(
+                        enlargeCenterPage: true,
+                        enableInfiniteScroll: false,
+                        height: MediaQuery.of(context).size.height * 0.78,
+                        viewportFraction: 1,
+                        scrollDirection: Axis.vertical,
                       ),
-                      //color: Colors.green,
-                    )).toList(),
-                  ),*/
-
-
-                  CarouselSlider(
-                    options: CarouselOptions(
-                      enableInfiniteScroll: false,
-                      height: 700,
-                      scrollDirection: Axis.vertical,
-                    ),
-                    items: articles.map((item) => GestureDetector(
+                      items: articles.map((item) => GestureDetector(
                         onTap: (){
                           Navigator.push(context, MaterialPageRoute(
                               builder: (context) => ArticleView(
@@ -125,36 +115,53 @@ class _newHomeState extends State<newHome> {
                           ));
                         },
                         child: ClipRRect(
-                          borderRadius: BorderRadius.circular(16),
-                          child: Stack(
-                              children:[
-                                Image.network(
-                                  item.urlToImage,
-                                  fit: BoxFit.fitHeight,
-                                  height: 600,
-                                ),
-                                Container(
-                                    height: 600,
-                                    decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(16),
+                            child: Stack(
+                                children:[
+                                  Image.network(
+                                    item.urlToImage,
+                                    fit: BoxFit.fitHeight,
+                                    height: 700,
+                                  ),
+                                  Container(
+                                    //GRADIENT OVERLAY ON PICTURE
+                                      height: 700,
+                                      decoration: BoxDecoration(
                                         //color: Colors.white,
-                                        gradient: LinearGradient(
-                                          begin: Alignment.topCenter,
-                                          end: Alignment.bottomCenter,
-                                          colors: [Colors.transparent, Color(0x00000000)],
-                                        )
-                                    )
-                                ),
-                                /*Container(
-                                  child: Align(
-                                    child: Text(item.title)
-                                  )
-                                )*/
-                              ]
-                          )
+                                          gradient: LinearGradient(
+                                            begin: Alignment.topCenter,
+                                            end: Alignment.bottomCenter,
+                                            stops:[0.55,0.90],
+                                            colors: [Colors.transparent, Colors.black87],
+                                          )
+                                      )
+                                  ),
+                                  Container(
+                                      margin: EdgeInsets.symmetric(horizontal: 16),
+                                      child:
+                                      Column(
+                                        mainAxisAlignment: MainAxisAlignment.end,
+                                        children: <Widget>[
+                                          Text(item.title, style: TextStyle(
+                                            fontSize: 18,
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.w500,
+                                          ),),
+                                          SizedBox(height: 8),
+                                          Text(item.description, style: TextStyle(
+                                            color: Colors.white,
+                                          ),),
+                                          SizedBox(height: 12),
+                                        ],
+                                      )
+                                  ),
+                                ]
+                            )
                         ),
+                      )
+                      ).toList(),
                     )
-                    ).toList(),
-                  )
+                  ),
                 ],
               ),
         )

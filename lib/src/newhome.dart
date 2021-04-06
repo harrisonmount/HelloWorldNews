@@ -44,28 +44,89 @@ class _newHomeState extends State<newHome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+      appBar: AppBar(
+        leading: Builder(
+            builder: (context) => IconButton(
+              icon: Icon(Icons.search),
+              onPressed: () => Scaffold.of(context).openDrawer(),
+            )
+        ),
+        //automaticallyImplyLeading: false,
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text("Hello"),
+            Text("News", style: TextStyle(
+                color: Colors.blueGrey
+            ),)
+          ],
+        ),
+        centerTitle: true,
+        elevation: 0.5,
+      ),
+      drawer: Container(
+        width: 350,
+        child: Drawer(
+          child: ListView(
             children: <Widget>[
-              Text("Hello"),
-              Text("News", style: TextStyle(
-                  color: Colors.blueGrey
-              ),)
+              ListTile(
+                title: Text('Search', style: TextStyle(
+                  fontSize: 18,
+                  color: Colors.black
+                ),),
+                onTap: () {
+                  Navigator.pop(context);
+                },
+              ),
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 16),
+                child: TextField(
+                  obscureText: true,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Password',
+                  ),
+                ),
+              ),
             ],
           ),
-          actions: <Widget>[
-            Opacity(
-              opacity: 0,
-              child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 16),
-                  child: Icon(Icons.save)),
-            )
-          ],
-          centerTitle: true,
-          elevation: 0.5,
         ),
+      ),
+      endDrawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+
+            Container(
+              height: 100,
+              child: DrawerHeader(
+                child: Text('Menu'),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                ),
+              ),
+            ),
+            ListTile(
+              title: Text('Item 1'),
+              onTap: () {
+                // Update the state of the app
+                // ...
+                // Then close the drawer
+                Navigator.pop(context);
+              },
+            ),
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 80),
+              child: ElevatedButton(
+                onPressed: () {
+                  context.read<AuthenticationService>().signOut();
+                },
+                child: Text("sign out"),
+              ),
+            ),
+          ],
+        ),
+      ),
         body: _loading ? Center(
           child: Container(
             child: CircularProgressIndicator(),
@@ -115,11 +176,11 @@ class _newHomeState extends State<newHome> {
                                   Image.network(
                                     item.urlToImage,
                                     fit: BoxFit.fitHeight,
-                                    height: 700,
+                                    height: MediaQuery.of(context).size.height * 0.78,
                                   ),
                                   Container(
                                     //GRADIENT OVERLAY ON PICTURE
-                                      height: 700,
+                                      height: MediaQuery.of(context).size.height * 0.78,
                                       decoration: BoxDecoration(
                                         //color: Colors.white,
                                           gradient: LinearGradient(
@@ -158,7 +219,7 @@ class _newHomeState extends State<newHome> {
                   ),
                 ],
               ),
-        )
+        ),
     );
   }
 }

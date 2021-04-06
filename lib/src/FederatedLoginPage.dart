@@ -126,6 +126,9 @@ class _FederatedPageState extends State<FederatedPage> {
 
 
     return Scaffold(
+      appBar: AppBar(
+
+      ),
       body: Center(
         child: Container(
           color: Colors.white,

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:csv/csv.dart';
+import 'package:hello_world/src/newhome.dart';
+import 'package:hello_world/helper/auth_service.dart';
+import 'package:provider/provider.dart';
 
 class OnBoarding extends StatefulWidget {
   //
@@ -40,6 +43,26 @@ class _OnBoardingState extends State<OnBoarding> {
         for(int x = 0; x < interestfile.length; x++)
         singleSectionColumn(interestfile[x]),
         Text('Selected: ${_filters.join(', ')}'),
+        SizedBox(height: 80),
+        MaterialButton(
+          minWidth: MediaQuery.of(context).size.width,
+          padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+          onPressed: () {
+            Navigator.pop(context);
+            /*context.read<AuthenticationService>().signUp(
+              email: _username.trim(),
+              password: _password.trim(),
+            );*/
+
+            //Navigator.push(
+            //context, MaterialPageRoute(builder: (context) => LoginPage())
+            //);
+          },
+          child: Text("Confirm Interests",
+              textAlign: TextAlign.center,
+              style: style.copyWith(
+                  color: Colors.black, fontWeight: FontWeight.bold)),
+        ),
       ],
     );
   }

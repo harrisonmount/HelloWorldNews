@@ -22,7 +22,7 @@ List<CategoryModel> getCategories(){
   categoryModel = new CategoryModel();
 
   //3
-  categoryModel.categoryName = "Politics";
+  categoryModel.categoryName = "Entertainment";
   categoryModel.imageUrl = "https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8cG9saXRpY3N8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1400&q=60";
   category.add(categoryModel);
 

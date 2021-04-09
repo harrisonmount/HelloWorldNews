@@ -110,7 +110,7 @@ class CategoryNewsClass{
 
     ArticleResponse queried = await newsApi.topHeadlines(
       //    country: country,
-      //    category: category,
+      category: category,
       //    sources: sources,
       //    q: q,
       language: 'en',

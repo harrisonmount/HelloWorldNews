@@ -89,6 +89,9 @@ class _SignInPageState extends State<SignInPage> {
         minWidth: MediaQuery.of(context).size.width,
         padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
         onPressed: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => OnBoarding(/*text: _username,text2: _password*/))
+              );
           context.read<AuthenticationService>().signUp(
             email: _username.trim(),
             password: _password.trim(),

@@ -20,8 +20,6 @@ class _newHomeState extends State<newHome> {
   List<CategoryModel> categories = new List<CategoryModel>();
   List<ArticleModel> articles = new List<ArticleModel>();
 
-  List<int> list = [1,2,3,4,5];
-
   bool _loading = true;
   @override
   void initState() {

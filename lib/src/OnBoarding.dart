@@ -44,24 +44,29 @@ class _OnBoardingState extends State<OnBoarding> {
         singleSectionColumn(interestfile[x]),
         Text('Selected: ${_filters.join(', ')}'),
         SizedBox(height: 80),
-        MaterialButton(
-          minWidth: MediaQuery.of(context).size.width,
-          padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-          onPressed: () {
-            Navigator.pop(context);
-            /*context.read<AuthenticationService>().signUp(
+        Container(
+          padding: EdgeInsets.symmetric(horizontal: 80),
+
+          child: MaterialButton(
+            color: Colors.blueGrey,
+            minWidth: MediaQuery.of(context).size.width,
+            padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+            onPressed: () {
+              Navigator.pop(context);
+              /*context.read<AuthenticationService>().signUp(
               email: _username.trim(),
               password: _password.trim(),
             );*/
 
-            //Navigator.push(
-            //context, MaterialPageRoute(builder: (context) => LoginPage())
-            //);
-          },
-          child: Text("Confirm Interests",
-              textAlign: TextAlign.center,
-              style: style.copyWith(
-                  color: Colors.black, fontWeight: FontWeight.bold)),
+              //Navigator.push(
+              //context, MaterialPageRoute(builder: (context) => LoginPage())
+              //);
+            },
+            child: Text("Confirm Interests",
+                textAlign: TextAlign.center,
+                style: style.copyWith(
+                    color: Colors.white, fontWeight: FontWeight.bold)),
+          ),
         ),
       ],
     );

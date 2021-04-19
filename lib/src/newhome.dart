@@ -79,10 +79,8 @@ class _newHomeState extends State<newHome> {
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 16),
                 child: TextField(
-                  obscureText: true,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
-                    labelText: 'Password',
                   ),
                 ),
               ),
@@ -104,7 +102,7 @@ class _newHomeState extends State<newHome> {
                 ),
               ),
             ),
-            ListTile(
+            /*ListTile(
               title: Text('Item 1'),
               onTap: () {
                 // Update the state of the app
@@ -112,7 +110,7 @@ class _newHomeState extends State<newHome> {
                 // Then close the drawer
                 Navigator.pop(context);
               },
-            ),
+            ),*/
             Container(
               padding: EdgeInsets.symmetric(horizontal: 80),
               child: ElevatedButton(

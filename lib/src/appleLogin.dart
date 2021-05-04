@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hello_world/main.dart';
+
 
 class appleLoginPage extends StatelessWidget {
   appleLoginPage({Key key, this.title}) : super(key: key);

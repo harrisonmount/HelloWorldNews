@@ -10,6 +10,7 @@ import 'package:provider/provider.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'article_view.dart';
 import 'package:hello_world/src/OnBoarding.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class newHome extends StatefulWidget {
 

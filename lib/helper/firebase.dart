@@ -7,7 +7,6 @@ Future<void> userSetup(List<String> interests) async {
 
   String uid = auth.currentUser.uid.toString();
   users.add({'uid': uid, 'interests': interests});
-
   return;
 }
 

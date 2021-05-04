@@ -143,6 +143,21 @@ class _newHomeState extends State<newHome> {
                 child: Text("Sign Out"),
               ),
             ),
+            StreamBuilder(
+              stream: FirebaseFirestore.instance.collection('Users').snapshots(),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) return const Text('Loading...');
+                return ListView.builder(
+                  itemCount: snapshot.data.documents.length,
+                  itemBuilder: (context, index) {
+                    return Text(snapshot.data.documents[index]);
+                  }
+                );
+              }
+            )
+            
+            
+            
             //Text(widget.filterinput[0]),
             /*ListView(
                 children: [for (int x  = 1;  x < widget.filterinput.length; x++)

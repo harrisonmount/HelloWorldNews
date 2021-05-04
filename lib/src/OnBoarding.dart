@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:csv/csv.dart';
 import 'package:hello_world/src/newhome.dart';
+import 'package:hello_world/helper/firebase.dart';
 import 'package:hello_world/helper/auth_service.dart';
 import 'package:provider/provider.dart';
 
@@ -52,7 +53,8 @@ class _OnBoardingState extends State<OnBoarding> {
             minWidth: MediaQuery.of(context).size.width,
             padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
             onPressed: () {
-              Navigator.push(
+              userSetup(_filters);
+              Navigator.pop(
                   context, MaterialPageRoute(builder: (context) => newHome(filterinput: _filters))
               );
               /*Navigator.push(

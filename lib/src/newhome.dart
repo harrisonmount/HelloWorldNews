@@ -9,8 +9,13 @@ import 'package:hello_world/src/category_news.dart';
 import 'package:provider/provider.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'article_view.dart';
+import 'package:hello_world/src/OnBoarding.dart';
 
 class newHome extends StatefulWidget {
+
+  newHome({Key key, @required this.filterinput}) : super(key: key);
+  final List<String> filterinput;
+
   @override
   _newHomeState createState() => _newHomeState();
 }
@@ -19,14 +24,19 @@ class _newHomeState extends State<newHome> {
 
   List<CategoryModel> categories = new List<CategoryModel>();
   List<ArticleModel> articles = new List<ArticleModel>();
+  final searchcontroller = new TextEditingController();
+
+  String _search = '';
 
   bool _loading = true;
   @override
   void initState() {
     // TODO: implement initState
-    super.initState();
     categories = getCategories();
     getNews();
+    print(widget.filterinput);
+
+    super.initState();
   }
 
   getNews() async{
@@ -79,8 +89,18 @@ class _newHomeState extends State<newHome> {
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 16),
                 child: TextField(
+                  controller: searchcontroller,
+                  //onSubmitted: ,
+                  onSubmitted: (text){
+                    this.setState((){
+                      _search = text;//when state changed
+                      print(_search);
+                    });
+                  },
                   decoration: InputDecoration(
+                    prefixIcon: Icon(Icons.search),
                     border: OutlineInputBorder(),
+                    hintText: 'Topics, People, etc...',
                   ),
                 ),
               ),
@@ -102,24 +122,31 @@ class _newHomeState extends State<newHome> {
                 ),
               ),
             ),
-            /*ListTile(
-              title: Text('Item 1'),
-              onTap: () {
-                // Update the state of the app
-                // ...
-                // Then close the drawer
-                Navigator.pop(context);
-              },
-            ),*/
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 80),
+              padding: EdgeInsets.symmetric(horizontal: 50),
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (context) => OnBoarding())
+                  );
+                },
+                child: Text("Change Interests"),
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 50),
               child: ElevatedButton(
                 onPressed: () {
                   context.read<AuthenticationService>().signOut();
                 },
-                child: Text("sign out"),
+                child: Text("Sign Out"),
               ),
             ),
+            //Text(widget.filterinput[0]),
+            /*ListView(
+                children: [for (int x  = 1;  x < widget.filterinput.length; x++)
+                  Text(widget.filterinput[x]),
+            ],),*/
           ],
         ),
       ),

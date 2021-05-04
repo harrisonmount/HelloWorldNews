@@ -52,15 +52,12 @@ class _OnBoardingState extends State<OnBoarding> {
             minWidth: MediaQuery.of(context).size.width,
             padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
             onPressed: () {
-              Navigator.pop(context);
-              /*context.read<AuthenticationService>().signUp(
-              email: _username.trim(),
-              password: _password.trim(),
-            );*/
-
-              //Navigator.push(
-              //context, MaterialPageRoute(builder: (context) => LoginPage())
-              //);
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => newHome(filterinput: _filters))
+              );
+              /*Navigator.push(
+              context, MaterialPageRoute(builder: (context) => newHome())
+              );*/
             },
             child: Text("Confirm Interests",
                 textAlign: TextAlign.center,

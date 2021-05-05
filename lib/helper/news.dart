@@ -48,10 +48,8 @@ class TopNews {
               urlToImage: element.urlToImage,
               content: element.content
           );
-
           news.add(articleModel);
         }
-
       });
     }
   }
@@ -112,10 +110,54 @@ class CategoryNewsClass{
       //    country: country,
       category: category,
       //    sources: sources,
-      //    q: q,
+      //    q: category,
       language: 'en',
       //    pageSize: pageSize,
       //    page: page,
+    );
+
+    if(queried.status) {
+      queried.articles.forEach((element) {
+        if (element.urlToImage != null && element.description != null) {
+          ArticleModel articleModel = ArticleModel(
+
+              title: element.title,
+              author: element.author,
+              // HE USES DOUBLE QUOTES
+              description: element.description,
+              url: element.url,
+              urlToImage: element.urlToImage,
+              content: element.content
+          );
+
+          news.add(articleModel);
+        }
+      });
+    }
+  }
+}
+
+class SearchNewsClass{
+  List<ArticleModel> news = [];
+
+  Future<void> getNews(String search) async{
+    var newsApi = NewsApi(
+      //  dioOptions: dioOptions,
+      //  interceptors: interceptors,
+      debugLog: true,
+      apiKey: 'foo',
+    );
+
+    newsApi.apiKey = '1562ed02072f49a193518d143d65603d';
+
+    ArticleResponse queried = await newsApi.everything(
+          //country: 'us',
+      //    category: category,
+      //    sources: sources,
+      q: search,
+      language: 'en',
+          pageSize: 10,
+          page: 1,
     );
 
     if(queried.status) {

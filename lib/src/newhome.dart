@@ -6,6 +6,7 @@ import 'package:hello_world/helper/news.dart';
 import 'package:hello_world/models/article_model.dart';
 import 'package:hello_world/models/category_model.dart';
 import 'package:hello_world/src/category_news.dart';
+import 'package:hello_world/src/search_news.dart';
 import 'package:provider/provider.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'article_view.dart';
@@ -44,6 +45,13 @@ class _newHomeState extends State<newHome> {
     TopNews newsClass = TopNews();
     await newsClass.getNews();
     articles = newsClass.news;
+
+
+
+    /*await Future.wait(fruits
+        .map((fruit) => Utils.cacheImage(context, fruit.urlImage))
+        .toList());*/
+
     setState(() {
       _loading = false; //Loading has stopped
     });
@@ -97,6 +105,11 @@ class _newHomeState extends State<newHome> {
                       _search = text;//when state changed
                       print(_search);
                     });
+                    Navigator.push(context, MaterialPageRoute(
+                        builder: (context) => SearchNews(
+                          search: _search.toLowerCase(),
+                        )
+                    ));
                   },
                   decoration: InputDecoration(
                     prefixIcon: Icon(Icons.search),
@@ -143,7 +156,7 @@ class _newHomeState extends State<newHome> {
                 child: Text("Sign Out"),
               ),
             ),
-            StreamBuilder(
+            /*StreamBuilder(
               stream: FirebaseFirestore.instance.collection('Users').snapshots(),
               builder: (context, snapshot) {
                 if (!snapshot.hasData) return const Text('Loading...');
@@ -154,7 +167,7 @@ class _newHomeState extends State<newHome> {
                   }
                 );
               }
-            )
+            )*/
             
             
             

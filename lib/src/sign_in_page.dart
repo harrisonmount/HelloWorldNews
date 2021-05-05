@@ -6,23 +6,17 @@ import 'package:hello_world/src/facebookLogin.dart';
 import 'package:hello_world/src/appleLogin.dart';
 import 'package:hello_world/src/googleLogin.dart';
 import 'package:hello_world/src/OnBoarding.dart';
-
 class SignInPage extends StatefulWidget {
   @override
   _SignInPageState createState() => _SignInPageState();
 }
 
-
-
 class _SignInPageState extends State<SignInPage> {
   TextStyle style = TextStyle(fontFamily: 'HelveticaNeue', fontSize: 20.0);
-
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-
   String _username = '';
   String _password = '';
-
   @override
   Widget build(BuildContext context) {
     final emailField = TextField(
@@ -40,7 +34,6 @@ class _SignInPageState extends State<SignInPage> {
           border:
           OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
     );
-
     final passwordField = TextField(
       controller: passwordController,//controller
       onChanged: (text2){
@@ -48,7 +41,6 @@ class _SignInPageState extends State<SignInPage> {
           _password = text2;//when state changed
         });
       },
-
       obscureText: true,
       style: style,
       decoration: InputDecoration(
@@ -57,7 +49,6 @@ class _SignInPageState extends State<SignInPage> {
           border:
           OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
     );
-
     final loginButton = Material(
       elevation: 5.0,
       borderRadius: BorderRadius.circular(30.0),
@@ -70,7 +61,6 @@ class _SignInPageState extends State<SignInPage> {
             email: _username.trim(),
             password: _password.trim(),
           );
-
           //Navigator.push(
           //context, MaterialPageRoute(builder: (context) => LoginPage())
           //);
@@ -91,12 +81,11 @@ class _SignInPageState extends State<SignInPage> {
         onPressed: () {
           Navigator.push(
               context, MaterialPageRoute(builder: (context) => OnBoarding())
-              );
+          );
           context.read<AuthenticationService>().signUp(
             email: _username.trim(),
             password: _password.trim(),
           );
-
           //Navigator.push(
           //context, MaterialPageRoute(builder: (context) => LoginPage())
           //);
@@ -115,7 +104,6 @@ class _SignInPageState extends State<SignInPage> {
         minWidth: MediaQuery.of(context).size.width,
         padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
         onPressed: () {
-
 
           Navigator.push(
               context, MaterialPageRoute(builder: (context) => FederatedPage())
@@ -229,7 +217,6 @@ class _SignInPageState extends State<SignInPage> {
       ),
     );
      */
-
 
     return Scaffold(
       body: Center(

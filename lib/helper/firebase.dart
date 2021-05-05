@@ -4,9 +4,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 Future<void> userSetup(List<String> interests) async {
   CollectionReference users = FirebaseFirestore.instance.collection('Users');
   FirebaseAuth auth = FirebaseAuth.instance;
-
+  bool onboarded = false;
   String uid = auth.currentUser.uid.toString();
-  users.add({'uid': uid, 'interests': interests});
+  users.add({'uid': uid, 'interests': interests, 'isOnboarded' : onboarded});
   return;
 }
 
